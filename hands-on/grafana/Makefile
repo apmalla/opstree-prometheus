@@ -39,6 +39,9 @@ run-grafana:
 	docker rm -f grafana-server || true
 	docker run -itd --name grafana-server --link prom-server:prom-server -p 3000:3000 opstree/grafana:server
 
+register-prometheus:
+	docker exec -it grafana-server curl --user admin:admin 'http://localhost:3000/api/datasources'     -X POST     -H 'Content-Type: application/json;charset=UTF-8'     --data-binary     '{"name":"Prometheus","type":"prometheus","url":"http://prom-server:9090","access":"proxy","isDefault":true}'
+
 run-all:
 	make build-server
 	make build-node
@@ -51,4 +54,5 @@ run-all:
 	make run-server
 	make build-grafana
 	make run-grafana
-
+	sleep 10s
+	make register-prometheus

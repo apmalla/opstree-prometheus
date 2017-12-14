@@ -1,6 +1,3 @@
-FROM grafana/grafana
+FROM prom/prometheus:v2.0.0
 
-COPY grafana.ini /etc/grafana/grafana.ini
-
-COPY prometheus.json /var/lib/grafana/dashboards/prometheus.json
-
+COPY *.yml /etc/prometheus/

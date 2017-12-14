@@ -1,0 +1,10 @@
+groups:
+- name: db.rules
+  rules:
+  - alert: DBsDown
+    expr: count((up{job="db-exporter"} == 0 )) > 0
+    for: 2m
+    labels:
+      severity: critical
+    annotations:
+      description: Some of the db nodes are down

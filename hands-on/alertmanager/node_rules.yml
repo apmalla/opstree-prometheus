@@ -1,0 +1,11 @@
+groups:
+- name: node.rules
+  rules:
+  - alert: NodesDown
+    expr: count((up{job="node-exporter"} == 0 )) > 0
+    for: 2m
+    labels:
+      severity: critical
+      service: node
+    annotations:
+      description: Some of the nodes are down

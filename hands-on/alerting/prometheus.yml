@@ -8,6 +8,7 @@ global:
 rule_files:
   - "node_rules.yml"
   - "db_rules.yml"
+  - "pod_rules.yml"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 scrape_configs:

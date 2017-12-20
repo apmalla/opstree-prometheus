@@ -1,0 +1,12 @@
+groups:
+- name: pod.rules
+  rules:
+  - alert: Pod is failed
+    expr: kube_node_status_condition{condition=Failed,status="true"} == 1
+    for: 1m
+    labels:
+      severity: warning
+    annotations:
+      description: The Kubelet on {{ $labels.node }} has failed
+      summary: Node status is Failed 
+
